@@ -1,0 +1,22 @@
+plugins {
+    id(Plugins.androidLibraryPlugin)
+    id(Plugins.kotlinAndroidPlugin)
+}
+
+apply {
+    from("$rootDir/base-module.gradle")
+}
+
+android {
+    namespace = ProjectConfig.appIdPrefix + "qr_scanner_data"
+}
+
+dependencies {
+    implementation(project(Modules.core))
+    implementation(project(Modules.qrScannerDomain))
+
+    implementation(Retrofit.okHttp)
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.okHttpLoggingInterceptor)
+    implementation(Retrofit.gson)
+}
