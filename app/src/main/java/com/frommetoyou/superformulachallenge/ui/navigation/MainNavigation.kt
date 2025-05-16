@@ -7,10 +7,14 @@ import com.frommetoyou.presentation.QRGeneratorScreen
 import com.frommetoyou.presentation.QRScannerScreen
 import kotlinx.serialization.Serializable
 
-@Serializable data object QRGeneratorRoute
-@Serializable data object QRScannerRoute
+@Serializable data object QRGeneratorRoute {
+        const val route = "qr_generator"
+}
+@Serializable data object QRScannerRoute {
+        const val route = "qr_scanner"
+}
 
 fun NavGraphBuilder.mainSection(navController: NavController) {
-        composable<QRGeneratorRoute>() { QRGeneratorScreen() }
-        composable<QRScannerRoute>() { QRScannerScreen() }
+        composable(QRGeneratorRoute.route) { QRGeneratorScreen() }
+        composable(QRScannerRoute.route) { QRScannerScreen() }
 }

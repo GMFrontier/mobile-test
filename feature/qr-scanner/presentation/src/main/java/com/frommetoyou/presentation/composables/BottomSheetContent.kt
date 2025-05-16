@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
@@ -18,8 +19,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.frommetoyou.core_ui.utils.UiText
+import com.frommetoyou.superformulachallenge.common.R
 
 @Composable
 fun BottomSheetContent(
@@ -34,26 +38,29 @@ fun BottomSheetContent(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Scanned QR Code", style = MaterialTheme.typography.headlineSmall)
+        Text(UiText.StringResource(R.string.scanned_code).asString(), style = MaterialTheme.typography.headlineSmall)
         Spacer(modifier = Modifier.height(8.dp))
         Text(scannedCode, textAlign = TextAlign.Center, style = MaterialTheme.typography.bodyLarge)
         Spacer(modifier = Modifier.height(24.dp))
 
         Row (horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Button(onClick = onCopy) {
-                Icon(Icons.Default.Share, contentDescription = "Copy")
+            Button(onClick = {
+                onCopy.invoke()
+                onClose.invoke()
+            }) {
+                Icon(painter = painterResource(id = R.drawable.ic_copy), contentDescription = "Copy", Modifier.size(24.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Copy")
+                Text(UiText.StringResource(R.string.copy).asString())
             }
             Button(onClick = onShare) {
-                Icon(Icons.Default.Share, contentDescription = "Share")
+                Icon(Icons.Default.Share, contentDescription = UiText.StringResource(R.string.share).asString(), Modifier.size(24.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Share")
+                Text(UiText.StringResource(R.string.copy).asString())
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedButton(onClick = onClose) {
-            Text("Close")
+            Text(UiText.StringResource(R.string.close).asString())
         }
     }
 }

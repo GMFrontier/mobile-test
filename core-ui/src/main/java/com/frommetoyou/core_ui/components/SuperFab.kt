@@ -18,10 +18,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -34,21 +36,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-
+import com.frommetoyou.core_ui.utils.UiText
+import com.frommetoyou.superformulachallenge.common.R
 
 @Composable
-fun SuperFab(onClick: () -> Unit) {
+fun SuperFab(
+    navigateToQrGenerator: () -> Unit,
+    navigateToQrScanner: () -> Unit
+) {
     var expandedFAB by remember { mutableStateOf(false) }
     val items = listOf(
         FabItem(
             icon = Icons.Filled.Search,
-            title = "Scan"
+            title = UiText.StringResource(R.string.scan).asString(),
+            navigation = navigateToQrScanner
         ),
         FabItem(
             icon = Icons.Filled.Share,
-            title = "QR Code"
+            title = UiText.StringResource(R.string.qr_code_option).asString(),
+            navigation = navigateToQrGenerator
         ),
     )
     Column(
@@ -58,21 +65,29 @@ fun SuperFab(onClick: () -> Unit) {
         horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.Bottom
     ) {
-        var transition = updateTransition(targetState = expandedFAB, label = "transition")
+        var transition =
+            updateTransition(targetState = expandedFAB, label = "transition")
         val rotation by transition.animateFloat(label = "rotation") {
-            if(it) 360f else 0f
+            if (it) 360f else 0f
         }
 
         AnimatedVisibility(
             visible = expandedFAB,
-            enter = fadeIn() + slideInVertically(initialOffsetY = {it}) + expandVertically(),
-            exit = fadeOut() + slideOutVertically(targetOffsetY = {it}) + shrinkVertically()
+            enter = fadeIn() + slideInVertically(initialOffsetY = { it }) + expandVertically(),
+            exit = fadeOut() + slideOutVertically(targetOffsetY = { it }) + shrinkVertically()
         ) {
-            LazyColumn (
+            LazyColumn(
                 modifier = Modifier.padding(bottom = 8.dp)
-            ){
+            ) {
                 items(items.size) {
-                    Fab(items[it].icon, items[it].title)
+                    Fab(
+                        items[it].icon,
+                        items[it].title,
+                        navigation = {
+                            expandedFAB = !expandedFAB
+                            items[it].navigation.invoke()
+                        }
+                    )
                     Spacer(modifier = Modifier.width(8.dp))
                 }
             }
@@ -82,32 +97,42 @@ fun SuperFab(onClick: () -> Unit) {
             modifier = Modifier.rotate(rotation),
             onClick = { expandedFAB = !expandedFAB },
         ) {
-            Icon(Icons.Filled.Add, "Floating action button.")
+            Icon(Icons.Filled.Add, UiText.StringResource(R.string.fab).asString())
         }
     }
 }
 
 @Composable
-fun Fab(icon: ImageVector, title: String) {
-    val context = LocalContext.current
+fun Fab(
+    icon: ImageVector,
+    title: String,
+    navigation: () -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End,
         modifier = Modifier.padding(bottom = 12.dp)
     ) {
         Spacer(modifier = Modifier.weight(1f))
-        Text(text = title)
+        Card(
+            shape = RoundedCornerShape(4.dp)
+        ) {
+            Text(
+                text = title, modifier = Modifier.padding(4.dp),
+            )
+        }
         Spacer(modifier = Modifier.width(8.dp))
         FloatingActionButton(
-            onClick = {},
+            onClick = navigation,
             modifier = Modifier.size(42.dp)
         ) {
-            Icon(imageVector = icon, contentDescription = "Item")
+            Icon(imageVector = icon, contentDescription = UiText.StringResource(R.string.item).asString())
         }
     }
 }
 
 data class FabItem(
     val icon: ImageVector,
-    val title: String
+    val title: String,
+    val navigation: () -> Unit
 )

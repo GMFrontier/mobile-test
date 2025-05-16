@@ -1,6 +1,8 @@
 package com.frommetoyou.core_ui.utils
 
 import android.content.Context
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -29,7 +31,9 @@ sealed class UiText {
         }
     }
 
-    fun asString(context: Context): String {
+    @Composable
+    fun asString(): String {
+        val context = LocalContext.current
         return when(this) {
             is DynamicString -> text
             is StringResource -> if(arguments != null) {

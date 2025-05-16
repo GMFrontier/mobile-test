@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="qr_code_option">QR Code</string>
+    <string name="qr_code">QR Code: %1$s</string>
+    <string name="expired">Expired</string>
+    <string name="refresh">Refresh</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
+    <string name="close">Close</string>
+    <string name="scanned_code">Scanned QR Code</string>
+    <string name="scan">Scan</string>
+    <string name="fab">Floating action button</string>
+    <string name="item">Item</string>
+</resources>

@@ -15,6 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.frommetoyou.core_ui.components.SuperFab
 import com.frommetoyou.superformulachallenge.ui.navigation.CentralNavigation
+import com.frommetoyou.superformulachallenge.ui.navigation.QRGeneratorRoute
+import com.frommetoyou.superformulachallenge.ui.navigation.QRScannerRoute
+import com.frommetoyou.superformulachallenge.ui.navigation.Screens
 import com.frommetoyou.superformulachallenge.ui.theme.SuperformulaChallengeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +27,8 @@ class MainActivity : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (!granted) {
-            Toast.makeText(this, "Camera permission denied", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Camera permission denied", Toast.LENGTH_LONG)
+                .show()
             finish()
         }
     }
@@ -39,7 +43,18 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     Box(modifier = Modifier.padding(innerPadding)) {
                         CentralNavigation(navController)
-                        SuperFab(onClick = {})
+                        SuperFab(
+                            navigateToQrGenerator = {
+                                navController.navigate(
+                                    QRGeneratorRoute.route
+                                )
+                            },
+                            navigateToQrScanner = {
+                                navController.navigate(
+                                    QRScannerRoute.route
+                                )
+                            }
+                        )
                     }
                 }
             }
