@@ -45,7 +45,10 @@ android {
 dependencies {
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5") // Or the latest version
 
+    implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
+    implementation(project(Modules.qrGeneratorData))
+    implementation(project(Modules.qrGeneratorDomain))
     implementation(project(Modules.qrGeneratorPresentation))
     implementation(project(Modules.qrScannerPresentation))
 

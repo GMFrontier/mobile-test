@@ -1,6 +1,7 @@
 plugins {
     id(Plugins.androidLibraryPlugin)
     id(Plugins.kotlinAndroidPlugin)
+    id(Plugins.kotlinSerializationPlugin) version (Kotlin.version)
 }
 
 apply {
@@ -13,4 +14,6 @@ android {
 
 dependencies {
     implementation(project(Modules.core))
+
+    implementation(Kotlin.kotlinSerializationJson)
 }

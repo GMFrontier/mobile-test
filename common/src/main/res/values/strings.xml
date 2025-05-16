@@ -11,4 +11,9 @@
     <string name="scan">Scan</string>
     <string name="fab">Floating action button</string>
     <string name="item">Item</string>
+    <string name="error_gen">Error generating QR code, please try again</string>
+    <string name="loading">Loading</string>
+    <string name="expires_in">Expires in %02d:%02d:%02d</string>
+    <string name="qr_gen_code">Please generate you QR by tapping the button below</string>
+    <string name="generate">Generate</string>
 </resources>

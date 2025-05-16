@@ -29,7 +29,6 @@ fun QRScannerGuideWithPath(
         val bottom = size.height / 2 + size.minDimension / 3
 
         val path = Path().apply {
-            // Top-left corner with rounded curve
             moveTo(left, top + cornerPx)
             lineTo(left, top + radiusPx)
             arcTo(
@@ -45,7 +44,6 @@ fun QRScannerGuideWithPath(
             )
             lineTo(left + cornerPx, top)
 
-            // Top-right corner with rounded curve
             moveTo(right - cornerPx, top)
             lineTo(right - radiusPx, top)
             arcTo(
@@ -61,7 +59,6 @@ fun QRScannerGuideWithPath(
             )
             lineTo(right, top + cornerPx)
 
-            // Bottom-right corner with rounded curve
             moveTo(right, bottom - cornerPx)
             lineTo(right, bottom - radiusPx)
             arcTo(
@@ -77,7 +74,6 @@ fun QRScannerGuideWithPath(
             )
             lineTo(right - cornerPx, bottom)
 
-            // Bottom-left corner with rounded curve
             moveTo(left + cornerPx, bottom)
             lineTo(left + radiusPx, bottom)
             arcTo(

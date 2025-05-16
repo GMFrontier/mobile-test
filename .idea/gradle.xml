@@ -32,8 +32,6 @@
             <option value="$PROJECT_DIR$/feature/qr-generator/domain" />
             <option value="$PROJECT_DIR$/feature/qr-generator/presentation" />
             <option value="$PROJECT_DIR$/feature/qr-scanner" />
-            <option value="$PROJECT_DIR$/feature/qr-scanner/data" />
-            <option value="$PROJECT_DIR$/feature/qr-scanner/domain" />
             <option value="$PROJECT_DIR$/feature/qr-scanner/presentation" />
           </set>
         </option>

@@ -1,6 +1,8 @@
 plugins {
     id(Plugins.androidLibraryPlugin)
     id(Plugins.kotlinAndroidPlugin)
+    id(Plugins.kotlinSerializationPlugin) version (Kotlin.version)
+
 }
 
 apply {
@@ -16,6 +18,8 @@ dependencies {
     implementation(project(Modules.coreUi))
     implementation(project(Modules.common))
     implementation(project(Modules.qrGeneratorDomain))
+
+    implementation(Kotlin.kotlinSerializationJson)
 
     implementation(QrCode.qrGenerator)
 }
