@@ -1,6 +1,6 @@
 package com.frommetoyou.superformulachallenge.di
 
-import com.frommetoyou.core.util.CoroutinesDispatcherProvider
+import com.frommetoyou.common.util.CoroutinesDispatcherProvider
 import com.frommetoyou.data.repository.QrCodeRepositoryImpl
 import com.frommetoyou.data.service.QrApiService
 import com.frommetoyou.domain.repository.QrRepository

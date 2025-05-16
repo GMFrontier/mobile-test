@@ -14,6 +14,6 @@ object Plugins {
     const val hiltAndroidPlugin =
         "com.google.dagger.hilt.android"
 
-    private const val junit5 = "1.9.3.0"
-    const val junit5Plugin = "de.mannodermaus.android-junit5:$junit5"
+    const val junit5 = "1.9.3.0"
+    const val junit5Plugin = "de.mannodermaus.android-junit5"
 }

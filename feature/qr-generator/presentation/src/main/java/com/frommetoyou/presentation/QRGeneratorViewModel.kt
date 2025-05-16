@@ -5,9 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.frommetoyou.common.util.Result
 import com.frommetoyou.common.util.asResult
 import com.frommetoyou.common.model.QrModel
+import com.frommetoyou.common.util.CoroutinesDispatcherProvider
 import com.frommetoyou.core_ui.utils.parseExpirationTime
 import com.frommetoyou.domain.use_case.QrCodeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,8 +21,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QRGeneratorViewModel @Inject constructor(
-    private val qrCodeUseCase: QrCodeUseCase
+    private val qrCodeUseCase: QrCodeUseCase,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Main.immediate
 ) : ViewModel() {
+    private val viewModelScope = CoroutineScope(dispatcher + SupervisorJob())
 
     private val _qrGeneratorUiState =
         MutableStateFlow<QRGeneratorUiState>(QRGeneratorUiState.Nothing)
@@ -26,9 +33,9 @@ class QRGeneratorViewModel @Inject constructor(
     private val _timeLeftMillis = MutableStateFlow(0L)
     val timeLeftMillis = _timeLeftMillis.asStateFlow()
 
-    fun getQrCode() = viewModelScope.launch {
+    fun getQrCode() = viewModelScope.launch(Dispatchers.IO) {
         qrCodeUseCase.getQrCode()
-            .asResult()
+
             .collect { result ->
                 _qrGeneratorUiState.value = when (result) {
                     is Result.Success -> {

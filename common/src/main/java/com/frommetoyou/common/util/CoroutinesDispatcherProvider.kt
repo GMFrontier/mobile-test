@@ -1,4 +1,4 @@
-package com.frommetoyou.core.util
+package com.frommetoyou.common.util
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

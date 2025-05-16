@@ -1,11 +1,14 @@
 package com.frommetoyou.data.di
 
-import com.frommetoyou.core.util.CoroutinesDispatcherProvider
+import com.frommetoyou.common.util.CoroutinesDispatcherProvider
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -23,5 +26,8 @@ class UtilsModule {
     fun provideCoroutineDispatchers(): CoroutinesDispatcherProvider {
         return CoroutinesDispatcherProvider()
     }
+
+    @Provides
+    fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
 }

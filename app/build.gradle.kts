@@ -5,6 +5,8 @@ plugins {
     id(Plugins.kspPlugin)
     id(Plugins.hiltAndroidPlugin)
     id(Plugins.kotlinSerializationPlugin) version (Kotlin.version)
+    id(Plugins.junit5Plugin) version (Plugins.junit5)
+
 }
 
 android {
