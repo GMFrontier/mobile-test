@@ -1,6 +1,6 @@
 package com.frommetoyou.data.service
 
-import com.frommetoyou.domain.model.QrModel
+import com.frommetoyou.common.model.QrModel
 import com.frommetoyou.superformulachallenge.core.BuildConfig
 import retrofit2.Response
 import retrofit2.http.GET

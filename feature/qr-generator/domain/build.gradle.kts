@@ -13,6 +13,7 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.common))
     implementation(project(Modules.core))
 
     implementation(Kotlin.kotlinSerializationJson)

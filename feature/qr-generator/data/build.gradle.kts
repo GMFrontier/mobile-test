@@ -13,6 +13,7 @@ android {
 
 dependencies {
     implementation(project(Modules.core))
+    implementation(project(Modules.common))
     implementation(project(Modules.qrGeneratorDomain))
 
     implementation(Retrofit.okHttp)

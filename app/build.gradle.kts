@@ -45,6 +45,7 @@ android {
 dependencies {
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5") // Or the latest version
 
+    implementation(project(Modules.common))
     implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
     implementation(project(Modules.qrGeneratorData))
@@ -76,6 +77,9 @@ dependencies {
     testImplementation(Testing.mockWebServer)
     testImplementation(Testing.coroutines)
     testImplementation(Testing.turbine)
+    testImplementation(Testing.jupiterApi)
+    runtimeOnly(Testing.jupiterEngine)
+    testImplementation(Testing.jupiterParams)
 
     androidTestImplementation(Testing.assertk)
     androidTestImplementation(Testing.mockkAndroid)

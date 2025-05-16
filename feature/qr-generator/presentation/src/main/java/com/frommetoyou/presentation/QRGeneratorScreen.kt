@@ -14,12 +14,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
@@ -27,16 +24,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.frommetoyou.core_ui.utils.UiText
-import kotlinx.coroutines.delay
+import com.frommetoyou.superformulachallenge.common.R
+import com.google.gson.Gson
 import qrcode.QRCode
 import qrcode.color.Colors
-import java.text.SimpleDateFormat
 import java.util.Locale
-import java.util.TimeZone
-import com.frommetoyou.superformulachallenge.common.R
-import kotlinx.serialization.json.Json
 
 @Composable
 fun QRGeneratorScreen(
@@ -44,6 +37,7 @@ fun QRGeneratorScreen(
     viewModel: QRGeneratorViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.qrGeneratorUiState.collectAsState().value
+    val timeLeftMillis by viewModel.timeLeftMillis.collectAsState()
 
     Column(
         modifier = modifier
@@ -66,34 +60,14 @@ fun QRGeneratorScreen(
 
             is QRGeneratorUiState.Success -> {
 
-                val dateFormat = remember {
-                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").apply {
-                        timeZone = TimeZone.getTimeZone("UTC")
-                    }
-                }
-
-                val expirationTime = remember(uiState.qrCode.expiresAt) {
-                    dateFormat.parse(uiState.qrCode.expiresAt)?.time ?: 0L
-                }
-
-                var timeLeftMillis by remember { mutableStateOf(expirationTime - System.currentTimeMillis()) }
-
-                LaunchedEffect(expirationTime) {
-                    while (timeLeftMillis > 0) {
-                        delay(1000)
-                        timeLeftMillis =
-                            expirationTime - System.currentTimeMillis()
-                    }
-                }
-
                 val seconds = (timeLeftMillis / 1000) % 60
                 val minutes = (timeLeftMillis / (1000 * 60)) % 60
                 val hours = (timeLeftMillis / (1000 * 60 * 60)) % 24
 
                 val qrCodeGraphics = QRCode.ofSquares()
                     .withColor(if (timeLeftMillis > 0) Colors.DEEP_SKY_BLUE else Colors.INDIAN_RED)
-                    .withSize(25)
-                    .build(Json.encodeToString(uiState.qrCode))
+                    .withSize(20)
+                    .build(Gson().toJson(uiState.qrCode))
                     .render()
 
                 val pngByteArray = remember(qrCodeGraphics) {

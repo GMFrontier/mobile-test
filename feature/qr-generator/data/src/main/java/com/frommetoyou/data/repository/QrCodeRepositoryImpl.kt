@@ -1,16 +1,14 @@
 package com.frommetoyou.data.repository
 
-import javax.inject.Inject
+import com.frommetoyou.common.model.QrModel
 import com.frommetoyou.core.util.CoroutinesDispatcherProvider
-import com.frommetoyou.core.util.parseResponse
 import com.frommetoyou.data.service.QrApiService
-import com.frommetoyou.domain.model.QrModel
 import com.frommetoyou.domain.repository.QrRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 class QrCodeRepositoryImpl @Inject constructor(
     private val qrApiService: QrApiService,

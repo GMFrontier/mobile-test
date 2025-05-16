@@ -24,11 +24,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.frommetoyou.presentation.QrScannerViewModel
 import com.frommetoyou.presentation.util.QRCodeAnalyzer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QRCodeScannerWithBottomSheet() {
+fun QRCodeScannerWithBottomSheet(
+    viewModel: QrScannerViewModel
+) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -45,6 +48,7 @@ fun QRCodeScannerWithBottomSheet() {
             sheetState = sheetState
         ) {
             BottomSheetContent(
+                viewModel = viewModel,
                 scannedCode = scannedCode.orEmpty(),
                 onCopy = {
                     clipboardManager.setPrimaryClip(

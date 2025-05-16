@@ -21,5 +21,7 @@ dependencies {
     implementation(Camera.cameraView)
     implementation(Camera.cameraLifecycle)
 
+    implementation(Retrofit.gson)
+
     implementation(QrCode.barcodeScanning)
 }
