@@ -21,5 +21,6 @@ dependencies {
     implementation(Camera.cameraCore)
     implementation(Camera.cameraView)
     implementation(Camera.cameraLifecycle)
-    implementation(Camera.barcodeScanning)
+
+    implementation(QrCode.barcodeScanning)
 }

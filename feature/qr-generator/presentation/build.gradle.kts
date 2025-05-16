@@ -17,5 +17,5 @@ dependencies {
     implementation(project(Modules.common))
     implementation(project(Modules.qrGeneratorDomain))
 
-    implementation(Camera.barcodeScanning)
+    implementation(QrCode.qrGenerator)
 }

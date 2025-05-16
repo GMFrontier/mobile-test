@@ -5,7 +5,4 @@ object Camera {
     const val camera2 = "androidx.camera:camera-camera2:$cameraVersion"
     const val cameraLifecycle = "androidx.camera:camera-lifecycle:$cameraVersion"
     const val cameraView = "androidx.camera:camera-view:$cameraVersion"
-
-    private const val barcodeScanningVersion = "17.3.0"
-    const val barcodeScanning = "com.google.mlkit:barcode-scanning:$barcodeScanningVersion"
 }

@@ -26,7 +26,7 @@ import kotlinx.serialization.Serializable
 fun CentralNavigation(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screens.QRGenerator.route
+        startDestination = Screens.QRScanner.route
     ) {
         mainSection(navController)
     }
