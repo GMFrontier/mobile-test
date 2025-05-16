@@ -4,6 +4,7 @@ plugins {
     id(Plugins.kotlinComposePlugin) version (Kotlin.version)
     id(Plugins.kspPlugin)
     id(Plugins.hiltAndroidPlugin)
+    id(Plugins.kotlinSerializationPlugin) version (Kotlin.version)
 }
 
 android {
@@ -44,11 +45,15 @@ android {
 dependencies {
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5") // Or the latest version
 
+    implementation(project(Modules.coreUi))
     implementation(project(Modules.qrGeneratorPresentation))
     implementation(project(Modules.qrScannerPresentation))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.lifecycleRuntimeKtx)
+    implementation(AndroidX.navigation)
+
+    implementation(Kotlin.kotlinSerializationJson)
 
     implementation(Compose.activityCompose)
     implementation(platform(Compose.composeBom))

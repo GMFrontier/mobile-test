@@ -16,4 +16,10 @@ dependencies {
     implementation(project(Modules.coreUi))
     implementation(project(Modules.common))
     implementation(project(Modules.qrScannerDomain))
+
+    implementation(Camera.camera2)
+    implementation(Camera.cameraCore)
+    implementation(Camera.cameraView)
+    implementation(Camera.cameraLifecycle)
+    implementation(Camera.barcodeScanning)
 }
