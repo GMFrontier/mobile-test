@@ -23,20 +23,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { granted ->
-        if (!granted) {
-            Toast.makeText(this, "Camera permission denied", Toast.LENGTH_LONG)
-                .show()
-            finish()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         setContent {
             SuperformulaChallengeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

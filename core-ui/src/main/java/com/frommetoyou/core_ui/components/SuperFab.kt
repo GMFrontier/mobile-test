@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.frommetoyou.core_ui.utils.UiText
 import com.frommetoyou.superformulachallenge.common.R
@@ -50,12 +51,14 @@ fun SuperFab(
         FabItem(
             icon = Icons.Filled.Search,
             title = UiText.StringResource(R.string.scan).asString(),
-            navigation = navigateToQrScanner
+            navigation = navigateToQrScanner,
+            description = UiText.StringResource(R.string.scan).asString()
         ),
         FabItem(
             icon = Icons.Filled.Share,
             title = UiText.StringResource(R.string.qr_code_option).asString(),
-            navigation = navigateToQrGenerator
+            navigation = navigateToQrGenerator,
+            description = UiText.StringResource(R.string.qr_code_option).asString()
         ),
     )
     Column(
@@ -86,7 +89,8 @@ fun SuperFab(
                         navigation = {
                             expandedFAB = !expandedFAB
                             items[it].navigation.invoke()
-                        }
+                        },
+                        description = items[it].description
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                 }
@@ -94,7 +98,8 @@ fun SuperFab(
         }
 
         FloatingActionButton(
-            modifier = Modifier.rotate(rotation),
+            modifier = Modifier.rotate(rotation)
+                .testTag(UiText.StringResource(R.string.fab).asString()),
             onClick = { expandedFAB = !expandedFAB },
         ) {
             Icon(Icons.Filled.Add, UiText.StringResource(R.string.fab).asString())
@@ -106,7 +111,8 @@ fun SuperFab(
 fun Fab(
     icon: ImageVector,
     title: String,
-    navigation: () -> Unit
+    navigation: () -> Unit,
+    description: String
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -125,6 +131,7 @@ fun Fab(
         FloatingActionButton(
             onClick = navigation,
             modifier = Modifier.size(42.dp)
+                .testTag(description)
         ) {
             Icon(imageVector = icon, contentDescription = UiText.StringResource(R.string.item).asString())
         }
@@ -134,5 +141,6 @@ fun Fab(
 data class FabItem(
     val icon: ImageVector,
     val title: String,
-    val navigation: () -> Unit
+    val navigation: () -> Unit,
+    val description: String
 )

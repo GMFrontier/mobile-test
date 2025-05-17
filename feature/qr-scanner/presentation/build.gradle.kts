@@ -24,4 +24,6 @@ dependencies {
     implementation(Retrofit.gson)
 
     implementation(QrCode.barcodeScanning)
+
+    implementation(Permissions.accompanistPermissions)
 }
