@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     id(Plugins.androidApplicationPlugin)
     id(Plugins.kotlinAndroidPlugin) version (Kotlin.version)
@@ -6,7 +8,7 @@ plugins {
     id(Plugins.hiltAndroidPlugin)
     id(Plugins.kotlinSerializationPlugin) version (Kotlin.version)
     id(Plugins.junit5Plugin) version (Plugins.junit5)
-
+    id(Plugins.ktLintPlugin)
 }
 
 android {
@@ -41,6 +43,36 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+}
+
+
+ktlint {
+    version.set("0.48.2")
+    debug.set(true)
+    verbose.set(true)
+    android.set(true)
+    outputToConsole.set(true)
+    outputColorName.set("RED")
+    ignoreFailures.set(true)
+    enableExperimentalRules.set(true)
+    additionalEditorconfig.set(
+        mapOf(
+            "max_line_length" to "20"
+        )
+    )
+    disabledRules.set(setOf("final-newline"))
+    baseline.set(file("${projectDir}/config/ktlint/baseline.xml"))
+    reporters {
+        reporter(ReporterType.PLAIN)
+        reporter(ReporterType.CHECKSTYLE)
+    }
+    kotlinScriptAdditionalPaths {
+        include(fileTree("scripts/"))
+    }
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
     }
 }
 

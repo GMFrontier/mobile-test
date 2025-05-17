@@ -16,4 +16,8 @@ object Plugins {
 
     const val junit5 = "1.9.3.0"
     const val junit5Plugin = "de.mannodermaus.android-junit5"
+
+    const val ktLintVersion = "12.1.0"
+    const val ktLintPlugin = "org.jlleitschuh.gradle.ktlint"
+
 }
